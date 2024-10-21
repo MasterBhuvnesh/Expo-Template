@@ -8,30 +8,40 @@ The `app` folder contains the main application code, organized as follows:
 
 ```bash
 app :
-| +html.tsx
-| +not-found.tsx
-| about.tsx
-| index.tsx
-| modal.tsx
-| \_layout.tsx
+|   +html.tsx
+|   +not-found.tsx
+|   about.tsx
+|   index.tsx
+|   modal.tsx
+|   _layout.tsx
+|
++---(auth)
+|       sign-in.tsx
+|       sign-up.tsx
+|       _layout.tsx
 |
 +---(drawer)
-| | favourites.tsx
-| | settings.tsx
-| | \_layout.tsx
-| |
-| \---(tabs)
-| | two.tsx
-| | \_layout.tsx
-| |
-| \---feed
-| index.tsx
-| new.tsx
-| \_layout.tsx
+|   |   favourites.tsx
+|   |   settings.tsx
+|   |   _layout.tsx
+|   |
+|   \---(tabs)
+|       |   two.tsx
+|       |   _layout.tsx
+|       |
+|       \---feed
+|               index.tsx
+|               new.tsx
+|               _layout.tsx
+|
++---(update)
+|       name.tsx
+|       pic.tsx
+|       _layout.tsx
 |
 \---blog
-index.tsx
-[id].tsx
+        index.tsx
+        [id].tsx
 ```
 
 ## Bottom Sheet
