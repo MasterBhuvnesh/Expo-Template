@@ -62,3 +62,5 @@ in the main \_layout.tsx file with :
       </ThemeProvider>
 </GestureHandlerRootView>
 ```
+
+upcoming add-on are : Clerk for authentication make a new clerk project + Dashborad it should also have update user name + change password too ,Using Graph + Api for fetching data, Also Google Sheet to api then use it in the app.
