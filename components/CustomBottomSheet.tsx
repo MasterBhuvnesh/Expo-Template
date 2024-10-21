@@ -1,9 +1,6 @@
 import { StyleSheet, useColorScheme } from "react-native";
 import React, { forwardRef, useCallback, useMemo } from "react";
-import BottomSheet, {
-  BottomSheetBackdrop,
-  useBottomSheet,
-} from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { View } from "./Themed";
 import { MonoText } from "./StyledText";
 import Colors from "../constants/Colors";

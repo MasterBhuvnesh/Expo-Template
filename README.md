@@ -64,3 +64,13 @@ in the main \_layout.tsx file with :
 ```
 
 upcoming add-on are : Clerk for authentication make a new clerk project + Dashborad it should also have update user name + change password too ,Using Graph + Api for fetching data, Also Google Sheet to api then use it in the app.
+
+### logout function in settings page
+
+## Command used to install the dependencies of clerk are
+
+```bash
+npm i @clerk/clerk-expo @expo/metro-runtime
+```
+
+## To enablw user to input there first and last name got to dashboard of clerk and go to Configure and then go Email,Phone,Username then enable Username and Personal Information

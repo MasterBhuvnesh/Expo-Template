@@ -9,9 +9,8 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/components/useColorScheme";
 import { router, usePathname } from "expo-router";
 import { StyleSheet } from "react-native";
-import { Feather, AntDesign } from "@expo/vector-icons";
+import { Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { ColorSchemeName } from "react-native";
-
 import Colors from "@/constants/Colors";
 
 const CustomDrawerContent = ({
@@ -40,6 +39,24 @@ const CustomDrawerContent = ({
       {...props}
       style={{ backgroundColor: Colors[colorScheme].background }}
     >
+      <DrawerItem
+        icon={({ color }) => (
+          <FontAwesome5
+            name="home"
+            size={iconSize}
+            color={getItemColor("/")}
+          />
+        )}
+        label="Home"
+        labelStyle={[styles.navItemLabel, { color: getItemColor("/") }]}
+        style={{
+          backgroundColor: getItemBackgroundColor("/"),
+        }}
+        onPress={() => {
+          // router.push("/");
+          router.dismissAll();
+        }}
+      />
       <DrawerItem
         icon={({ color }) => (
           <Feather

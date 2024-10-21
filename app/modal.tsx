@@ -15,12 +15,12 @@ export default function ModalScreen() {
       <MonoText
         style={{
           marginTop: 10,
-          fontSize: 12,
+          fontSize: 10,
           padding: 10,
           textAlign: "center",
         }}
       >
-        Download Expo Template from the github ,url is given below ^_^
+        Download Expo Template from the github url is given below ^_^
       </MonoText>
       <View
         style={[
