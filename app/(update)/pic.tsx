@@ -1,67 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
-  Button,
   Image,
   StyleSheet,
-  Alert,
   ScrollView,
   TouchableOpacity,
   ToastAndroid,
-  Platform,
 } from "react-native";
-import { useUser } from "@clerk/clerk-expo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Stack } from "expo-router";
 import { MonoText } from "@/components/StyledText";
+
 // Import predefined profile images
-const profileImages = [
-  require("@/assets/profile/naruto.png"),
-  require("@/assets/profile/luffy.png"),
-  require("@/assets/profile/sanji.png"),
-  require("@/assets/profile/zoro.png"),
+const profileImages = {
+  luffy: require("@/assets/profile/luffy.png"),
+  sanji: require("@/assets/profile/sanji.png"),
+  zoro: require("@/assets/profile/zoro.png"),
   // Add more images as needed
-];
+};
 
 export default function UpdateProfileImageScreen() {
-  const { user } = useUser();
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string>("zoro");
 
-  const handleSelectImage = (index: number) => {
-    setSelectedImage(index);
+  useEffect(() => {
+    // Load the saved profile image on component mount
+    loadProfileImage();
+  }, []);
+
+  const loadProfileImage = async () => {
+    try {
+      const savedImage = await AsyncStorage.getItem("pic");
+      if (savedImage !== null) {
+        setSelectedImage(savedImage);
+      }
+    } catch (error) {
+      console.error("Failed to load profile image:", error);
+    }
+  };
+
+  const handleSelectImage = (imageName: string) => {
+    setSelectedImage(imageName);
   };
 
   const handleUpdateProfileImage = async () => {
-    if (selectedImage === null) {
-      Alert.alert("Please select an image first!");
-      return;
-    }
-
     try {
-      // Get the selected image's URI
-      const imageUri = Image.resolveAssetSource(
-        profileImages[selectedImage]
-      ).uri;
-
-      // Fetch the image as a blob
-      const response = await fetch(imageUri);
-      const blob = await response.blob();
-
-      // Create a File object
-      const fileName = `profile_image_${Date.now()}.png`;
-      const file = new File([blob], fileName, { type: "image/png" });
-
-      // Update user profile image
-      await user?.setProfileImage({ file });
+      await AsyncStorage.setItem("pic", selectedImage);
       ToastAndroid.show(
         "Your profile image has been updated!",
         ToastAndroid.SHORT
       );
     } catch (error) {
       console.error("Failed to update profile image: ", error);
-      if (error instanceof Error) {
-        console.error("Error message:", error.message);
-        console.error("Error stack:", error.stack);
-      }
       ToastAndroid.show(
         "There was a problem updating your profile image.",
         ToastAndroid.SHORT
@@ -85,13 +74,13 @@ export default function UpdateProfileImageScreen() {
         showsHorizontalScrollIndicator={false}
         style={styles.imageSelector}
       >
-        {profileImages.map((image, index) => (
+        {Object.entries(profileImages).map(([name, image]) => (
           <TouchableOpacity
-            key={index}
-            onPress={() => handleSelectImage(index)}
+            key={name}
+            onPress={() => handleSelectImage(name)}
             style={[
               styles.imageThumbnail,
-              selectedImage === index && styles.selectedThumbnail,
+              selectedImage === name && styles.selectedThumbnail,
             ]}
           >
             <Image
@@ -101,17 +90,15 @@ export default function UpdateProfileImageScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      {selectedImage !== null && (
+      {selectedImage && (
         <Image
-          source={profileImages[selectedImage]}
+          source={profileImages[selectedImage as keyof typeof profileImages]}
           style={styles.selectedImage}
         />
       )}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {
-          handleUpdateProfileImage();
-        }}
+        onPress={handleUpdateProfileImage}
       >
         <MonoText style={styles.buttonText}>Update Profile Image</MonoText>
       </TouchableOpacity>

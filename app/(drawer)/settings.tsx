@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  ToastAndroid,
+  TouchableOpacity,
+} from "react-native";
 import { View } from "@/components/Themed";
 import { MonoText } from "@/components/StyledText";
 
@@ -11,6 +16,7 @@ import { useRouter } from "expo-router";
 // Custom Bottom Sheet
 import CustomBottomSheet from "@/components/CustomBottomSheet";
 import BottomSheet from "@gorhom/bottom-sheet";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsScreen() {
   // auth related hooks
@@ -21,6 +27,7 @@ export default function SettingsScreen() {
   const handleLogout = async () => {
     await signOut(); // Sign out the user
     // router.replace("/"); // Redirect to sign-in page after logout
+
     router.dismissAll();
   };
   /*
@@ -72,6 +79,23 @@ export default function SettingsScreen() {
         onPress={handleLogout}
       >
         <MonoText style={styles.buttonText}>Logout</MonoText>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={async () => {
+          try {
+            await AsyncStorage.removeItem("pic");
+            ToastAndroid.show("Profile picture cleared", ToastAndroid.SHORT);
+          } catch (error) {
+            console.error("Failed to clear profile picture:", error);
+            ToastAndroid.show(
+              "Failed to clear profile picture",
+              ToastAndroid.SHORT
+            );
+          }
+        }}
+      >
+        <MonoText style={styles.buttonText}>Clear Profile Picture</MonoText>
       </TouchableOpacity>
     </View>
   );
