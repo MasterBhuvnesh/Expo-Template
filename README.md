@@ -32,6 +32,7 @@ app :
 |       \---feed
 |               index.tsx
 |               new.tsx
+|               add.tsx
 |               _layout.tsx
 |
 +---(update)
@@ -84,3 +85,5 @@ npm i @clerk/clerk-expo @expo/metro-runtime
 ## To enablw user to input there first and last name got to dashboard of clerk and go to Configure and then go Email,Phone,Username then enable Username and Personal Information
 
 ## Update username and profile image in settings page
+
+## Add a new page in feed tab which is a modal with transparent background and shows graph of the data using gifted graph also have modifiy the tab bar . -- Oct 27 2024 11:44 AM
