@@ -26,7 +26,7 @@ const CloseBtn = () => {
 */
 
 const CustomBottomSheet = forwardRef<Ref, Props>((props, ref) => {
-  const snapPoints = useMemo(() => ["10%", "25%"], []);
+  const snapPoints = useMemo(() => ["30%", "55%"], []);
   const colorScheme = useColorScheme();
 
   // Backdrop component to handle the backdrop of the bottom sheet

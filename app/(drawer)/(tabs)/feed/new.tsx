@@ -10,12 +10,18 @@ export default function NewScreen() {
     <View style={styles.container}>
       <MonoText style={styles.title}> This is New Page </MonoText>
       <MonoText>[ app/(drawer)/(tabs)/feed/new.tsx ]</MonoText>
-      <View style={{ marginTop: 20 }}>
+      <View style={{ marginTop: 20, gap: 10 }}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => router.back()}
         >
           <MonoText style={styles.buttonText}>Go Back</MonoText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/feed/add" as any)}
+        >
+          <MonoText style={styles.buttonText}>Go to Add Page</MonoText>
         </TouchableOpacity>
       </View>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
