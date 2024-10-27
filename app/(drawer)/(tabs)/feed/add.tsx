@@ -137,12 +137,8 @@ export default function Modal() {
             }}
           >
             <BarChart
-              // horizontal
-
               barWidth={20}
               stepHeight={15}
-              // barBorderTopLeftRadius={5}
-              // barBorderTopRightRadius={5}
               barBorderRadius={5}
               frontColor="lightgray"
               backgroundColor={
@@ -156,17 +152,15 @@ export default function Modal() {
               rulesType="dashed"
               initialSpacing={15}
               spacing={15}
-              isAnimated={true}
+              isAnimated
+              animationDuration={1000}
+              maxValue={800}
+              noOfSections={8}
               xAxisLabelTextStyle={{
                 fontFamily: "SpaceMono",
                 fontSize: 10,
                 color: colorScheme === "dark" ? "#fff" : "#000",
               }}
-              renderTooltip={(item: any) => (
-                <View>
-                  <MonoText>{item.value}</MonoText>
-                </View>
-              )}
             />
           </View>
           {/* <Link href="/">
